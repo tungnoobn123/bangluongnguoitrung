@@ -26,7 +26,8 @@ $("#btnSm").click(function(){
         var data=inputStaff;
        
           
-         window.location.href = "https://github.com/tungnoobn123/bangluongnguoitrung/bangluongnguoitrung.html?data="+data+"";
+         window.location.href = "https://tungnoobn123.github.io/bangluongnguoitrung/bangluongnguoitrung.html?data="+data+"";
+         
         // return;
         // resultText.textContent = "✅ Nhân viên hợp lệ!";
         // resultText.style.color = "green";
