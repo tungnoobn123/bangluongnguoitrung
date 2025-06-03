@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>bảng lương</title>
+</head>
+<style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+
+            table th {
+                background-color: #F7F7F7;
+                color: #333;
+                font-weight: bold;
+            }
+
+            table th, table td {
+                padding: 5px;
+                border: 1px solid #ccc;
+            }
+    </style>
+<body>
+  <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <!--<input type="button" id="btnExport" value="Export pdf" />-->
+                <button type="button" id="btnExportpdf">EXPORT PDF</button>
+                <button type="button" id="btnExport" onclick="exportReportToExcel(this)">EXPORT EXCEL</button>
+                <br />
+                <br />
+                <table id="tblCustomers" class="table table-bordered">
+                    <tr>
+                        <th colspan="2" id="Fdate">Bảng Lương </th>
+                        <th>Số thẻ 工号</th>
+                        <th id="MATHE"></th>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Bộ phận 部门</td>
+                        <td id="BOPHAN" style="font-weight:bold">IT</td>
+                        <td style="font-weight:bold">Họ và tên 姓名</td>
+                        <td id="HOVATEN" style="font-weight:bold">Hoàng Đắc Tùng</td>
+                    </tr>
+                    <tr>
+                        <td>Bậc lương mới 新的级别</td>
+                        <td style="font-weight:bold" id="BACLUONGMOI">0</td>
+                        <td >TC ngày lễ tết (300%)节日白班加班(h)</td>
+                        <td id="TCNGAYLETET300" style="font-weight:bold">0</td>
+                    </tr>
+                    <tr>
+                        <td >Lương cơ bản 基本工资</td>
+                        <td id="LUONGCOBAN">10</td>
+                        <td>TC đêm lễ tết (390%)节日夜班加班(h)</td>
+                        <td id="TCDEMLETET300">0</td>
+                    </tr>
+                    <tr>
+                        <td>Trợ cấp xăng xe</td>
+                        <td id="TROCAPXANGXE">0</td>
+                        <td colspan="2" style="font-weight:bold">Tiền  Lương  薪资</td>
+                       
+                    </tr>
+                    <tr>
+                        <td>Trợ cấp Cương vị 岗位贴 </td>
+                        <td id="TROCAPCUONGVI">10</td>
+                        <td >Lương ban ngày  <strong>(1)</strong>
+                                            白班工资
+                                            </td>
+                                            <td id="LUONGBANNGAY">0</td>
+                    </tr>
+                    <tr>
+                        <td>Trợ cấp nước ngoài海外津贴</td>
+                        <td id="TROCAPNUOCNGOAI">0</td>
+                        <td >Lương PC ban đêm<strong>(2)</strong>
+夜班工资
+</td>
+ <td id="LUONGPCBANDEM">0</td>
+                    </tr>
+                    <tr>
+                        <td>Trợ cấp đặc biêt特殊津贴</td>
+                        <td id="TROCAPDACBIET">0</td>
+                        <td colspan="2">Tiền tăng ca 加班费</td>
+                    </tr>
+                    <tr>
+                        <td>Hiệu suất绩效奖</td>
+                        <td id="HIEUSUAT">0</td>
+                        <td>Tiền tăng ca 加班工资 <strong>(3)</strong> </td>
+                        <td id="TIENTANGCA">0</td>
+                    </tr>
+                    <tr>
+                        <td>Trợ cấp nhà ở住房补贴</td>
+                        <td id="TROCAPNHAO">0</td>
+                        <td >ĐC lương补发工资(迟到,小孩补贴，奖罚…<strong>(4)</strong>) </td>
+                        <td id="DCLUONG"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; text-decoration: underline;">Tổng lương 总工资 </td>
+                        <td id="TONGLUONG">0</td>
+                        <td>Trợ cấp khác其他补助 <strong>(5)</strong>
+                            (小孩,SAP, 防灾…)
+                            </td>
+                        <td id="TROCAPKHAC">0</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; ">TỔNG NGÀY CÔNG总工作日</td>
+                        <td id="TONGNGAYCONG">0</td>
+                        <td style="font-weight: bold; ">Tổng thu nhập总收入 ((I)=(1)+(2)+(3)+(4)+(5)) </td>
+                        <td id="TONGTHUNHAP">0</td>
+                    </tr>
+                    <tr>
+                        <td >Ca ngày 白班上班数</td>
+                        <td id="CANGAY">0</td>
+                        <td style="font-weight:bold">LƯƠNG TÍNH BH+CĐ
+                                算保险和公会的工资
+                                </td>
+                        <td style="font-weight:bold" id="LUONGTINHBHCD">0</td>
+                    </tr>
+                    <tr>
+                        <td>Ca đêm
+                        夜班上班天数
+                        </td>
+                        <td id="CADEM">0</td>
+                        <td>BHXH, BHYT, BHTN: <strong>(6)</strong>
+社保，医保，失业保险
+ </td>
+                        <td id="BHXHBHYT">0</td>
+                    </tr>
+                 
+                    <tr>
+                        <td>Nghỉ phép 休假</td>
+                        <td id="NGHIPHEP">0</td>
+                        <td>Thuế TNCN个人所得税 <strong>(7)</strong></td>
+                        <td id="THUETNCN">0</td>
+                    </tr>
+                 
+                    <tr>
+                        <td>Đi muộn (ph)
+迟到早退 (分)
+</td>
+                        <td id="DIMUON">0</td>
+                        <td>其他扣钱 <strong>(8)</strong></td>
+                        <td id="KHAUTRUKHAC">0</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="font-weight:bold" >Giờ tăng ca加班时间</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>Tăng ca ngày (150%)
+白班加班时间 (h)
+</td>
+                        <td id="TANGCANGAY">0</td>
+                        <td style="font-weight: bold; ">Tổng khấu trừ扣款合计 (II)=(6)+(7)+(8)</td>
+                        <td id="TONGKHAUTRU">0</td>
+                    </tr>
+                   
+                    <tr>
+                        <td style="font-weight:bold">CN ngày & TC đêm (h) (200%)周日加班</td>
+                        <td style="font-weight:bold" id="CNNGAYTCDEM">0</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>CN đêm  (280%)
+周日夜班加班(h)
+</td>
+                        <td id="CNDEM280">0</td>
+                        <td style="font-weight:bold">THỰC LĨNH MỚI
+新的实领 (III)=(I)-(II)
+</td>
+                        <td id="THUCLINHMOI">0</td>
+                    </tr>
+                   
+                    <tr>
+                        <td colspan="4" style="font-weight:bold;font-size:20px;text-align:center">
+                            Công ty TNHH Blueway Vina xin chân thành cảm ơn sự nỗ lực của bạn!
+                           <br>
+                           蓝威越南责任有限公司诚挚感谢您的努力！
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+
+    </div>
+     <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  <script type="text/javascript" src="blnt.js"></script>
+  <script>
+    
+  </script>
+</body>
+</html>
